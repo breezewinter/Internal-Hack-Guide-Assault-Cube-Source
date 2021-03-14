@@ -2,9 +2,10 @@
 
 bool healthSwitch = false;
 DWORD localPlayer = *(DWORD*)(moduleBase + 0x10F4F4);
+DWORD moduleBase = (DWORD)GetModuleHandle("ac_client.exe");
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-    DWORD moduleBase = (DWORD)GetModuleHandle("ac_client.exe");
+    
     AllocConsole();
     FILE* f;
     freopen_s(&f, "CONOUT$", "w", stdout);
