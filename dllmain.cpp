@@ -1,8 +1,8 @@
 #include "functions.h"
 
 bool healthSwitch = false;
-
-int WINAPI MainThread(HMODULE hModule)
+DWORD localPlayer = *(DWORD*)(moduleBase + 0x10F4F4);
+DWORD WINAPI MainThread(HMODULE hModule)
 {
     DWORD moduleBase = (DWORD)GetModuleHandle("ac_client.exe");
     AllocConsole();
@@ -15,36 +15,33 @@ int WINAPI MainThread(HMODULE hModule)
         if (GetAsyncKeyState(VK_F1) & 1)
         {
             healthSwitch = !healthSwitch;
-            if (healthSwitch)
+            if (healthSwitch == true)
             {
                 printf("Unlimited health on!\n");
+                
             }
             else
             {
                 printf("Unlimited health off!\n");
             }
-        }
-        if (healthSwitch)
+        
+        }  
+       
+        if (healthSwitch == true)
         {
-            ptr localPlayer = *(ptr*)(moduleBase + 0x10F4F4);
+            //Write our health value to 1337
             *(int*)(localPlayer + 0xF8) = 1337;
         }
-        else
-        {
-            ptr localPlayer = *(ptr*)(moduleBase + 0x10F4F4);
-            if (true & 1)
-            {
-                *(int*)(localPlayer + 0xF8) = 100;
-            }
-        }
-        if (GetAsyncKeyState(VK_END))
+     
+        if (GetAsyncKeyState(VK_END) & 1)
         {
             FreeLibraryAndExitThread(hModule, NULL);
-            return 0;
+            fclose(f);
+            
         }
     }
 
-
+    return 0;
 }
 
 
