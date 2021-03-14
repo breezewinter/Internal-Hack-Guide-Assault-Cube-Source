@@ -34,10 +34,10 @@ DWORD WINAPI MainThread(HMODULE hModule)
         }
      
         if (GetAsyncKeyState(VK_END) & 1)
-        {
-            FreeLibraryAndExitThread(hModule, NULL);
+        {   
             fclose(f);
-            
+            FreeConsole();
+            FreeLibraryAndExitThread(hModule, NULL);
         }
     }
 
