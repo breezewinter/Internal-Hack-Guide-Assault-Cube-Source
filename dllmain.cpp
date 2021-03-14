@@ -1,8 +1,8 @@
 #include "functions.h"
 
 bool healthSwitch = false;
-DWORD localPlayer = *(DWORD*)(moduleBase + 0x10F4F4);
 DWORD moduleBase = (DWORD)GetModuleHandle("ac_client.exe");
+DWORD localPlayer = *(DWORD*)(moduleBase + 0x10F4F4);
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     
